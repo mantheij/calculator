@@ -3,12 +3,19 @@ package com.jan.calculator;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
+import javax.script.ScriptEngineManager;
 import java.sql.SQLOutput;
 import java.util.HashMap;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.Arrays;
 import java.util.function.BiFunction;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.stereotype.Component;
+
+import javax.script.ScriptEngine;
+import javax.script.ScriptEngineManager;
+import javax.script.ScriptException;
 
 @Component
 public class MyCalculatorApplication implements CommandLineRunner {
@@ -18,8 +25,8 @@ public class MyCalculatorApplication implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-        double first = 0;
-        double second = 0;
+        double first;
+        double second;
         String operator;
 
         final String RESET = "\u001B[0m";
@@ -72,7 +79,7 @@ public class MyCalculatorApplication implements CommandLineRunner {
         operationsMap.put("/", (a, b) -> calculate.divide());
         operationsMap.put("pwr", (a, b) -> calculate.pwr());
         double result = operationsMap.get(operator).apply(first, second);
-        System.out.println("Calculated result:\n" + RED + first + " " + operator + " " + second + " = " + result);
+        System.out.println("Calculated result:\n" + first + " " + operator + " " + second + " = " + GREEN + result);
 
     }
 }
